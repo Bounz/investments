@@ -44,7 +44,7 @@ impl RecordParser for WithholdingTaxParser {
 fn parse_tax_description(description: &str) -> GenericResult<String> {
     lazy_static! {
         static ref DESCRIPTION_REGEX: Regex = Regex::new(
-            r"^(?P<issuer>[A-Z]+) ?\([A-Z0-9]+\) Cash Dividend .+? - US Tax$").unwrap();
+            r"^(?P<issuer>[A-Z]+) ?\([A-Z0-9]+\) (?:Cash Dividend .+?|Payment in Lieu of Dividend) - US Tax$").unwrap();
     }
 
     let captures = DESCRIPTION_REGEX.captures(description).ok_or_else(|| format!(
